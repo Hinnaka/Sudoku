@@ -1,0 +1,181 @@
+import msvcrt
+def printFileBoard(board):
+    string = ""
+    string = string + "*********************\n"
+    for x in range(0, 9):
+        if x == 3 or x == 6:
+            string = string + "*********************\n"
+        for y in range(0, 9):
+            if y == 3 or y == 6:
+                string = string + " * "
+            string = string + str(board[x][y]) + " "
+        string = string + "\n"
+    string = string + "*********************\n"
+    return string
+def printBoard(board):
+    print("*********************")
+    for x in range(0, 9):
+        if x == 3 or x == 6:
+            print("*********************")
+        for y in range(0, 9):
+            if y == 3 or y == 6:
+                print("*", end=" ")
+            print(board[x][y], end=" ")
+        print()
+    print("*********************")
+ 
+def isFull(board):
+    for x in range(0, 9):
+        for y in range (0, 9):
+            if board[x][y] == 0:
+                return False
+    return True
+    
+def possibleEntries(board, i, j):
+    possibilityArray = {}
+    
+    for x in range (1, 10):
+        possibilityArray[x] = 0
+    for y in range (0, 9):
+        if not board[i][y] == 0: 
+            possibilityArray[board[i][y]] = 1
+    for x in range (0, 9):
+        if not board[x][j] == 0: 
+            possibilityArray[board[x][j]] = 1
+    k = 0
+    l = 0
+    if i >= 0 and i <= 2:
+        k = 0
+    elif i >= 3 and i <= 5:
+        k = 3
+    else:
+        k = 6
+    if j >= 0 and j <= 2:
+        l = 0
+    elif j >= 3 and j <= 5:
+        l = 3
+    else:
+        l = 6
+    for x in range (k, k + 3):
+        for y in range (l, l + 3):
+            if not board[x][y] == 0:
+                possibilityArray[board[x][y]] = 1          
+    for x in range (1, 10):
+        if possibilityArray[x] == 0:
+            possibilityArray[x] = x
+        else:
+            possibilityArray[x] = 0
+    
+    return possibilityArray
+def sudokuSolver(board):
+    i = 0
+    j = 0
+    possiblities = {}
+    if isFull(board):
+        print("Sudoku solcuionat correctament!")
+        printBoard(board)
+        return
+    else:
+        for x in range (0, 9):
+            for y in range (0, 9):
+                if board[x][y] == 0:
+                    i = x
+                    j = y
+                    break
+            else:
+                continue
+            break
+        possiblities = possibleEntries(board, i, j)
+        for x in range (1, 10):
+            if not possiblities[x] == 0:
+                board[i][j] = possiblities[x]
+                sudokuSolver(board)
+        board[i][j] = 0
+    SudokuBoard = [[0 for x in range(9)] for x in range(9)] 
+    print('\a Planteja el teu sudoku \n 0 = cap número en la casella')
+    SudokuBoard[0][0] = int(input())
+    SudokuBoard[0][1] = int(input())
+    SudokuBoard[0][2] = int(input())
+    SudokuBoard[0][3] = int(input())
+    SudokuBoard[0][4] = int(input())
+    SudokuBoard[0][5] = int(input())
+    SudokuBoard[0][6] = int(input())
+    SudokuBoard[0][7] = int(input())
+    SudokuBoard[0][8] = int(input())
+    SudokuBoard[1][0] = int(input())
+    SudokuBoard[1][1] = int(input())
+    SudokuBoard[1][2] = int(input())
+    SudokuBoard[1][3] = int(input())
+    SudokuBoard[1][4] = int(input())
+    SudokuBoard[1][5] = int(input())
+    SudokuBoard[1][6] = int(input())
+    SudokuBoard[1][7] = int(input())
+    SudokuBoard[1][8] = int(input())
+    SudokuBoard[2][0] = int(input())
+    SudokuBoard[2][1] = int(input())
+    SudokuBoard[2][2] = int(input())
+    SudokuBoard[2][3] = int(input())
+    SudokuBoard[2][4] = int(input())
+    SudokuBoard[2][5] = int(input())
+    SudokuBoard[2][6] = int(input())
+    SudokuBoard[2][7] = int(input())
+    SudokuBoard[2][8] = int(input())
+    SudokuBoard[3][0] = int(input())
+    SudokuBoard[3][1] = int(input())
+    SudokuBoard[3][2] = int(input())
+    SudokuBoard[3][3] = int(input())
+    SudokuBoard[3][4] = int(input())
+    SudokuBoard[3][5] = int(input())
+    SudokuBoard[3][6] = int(input())
+    SudokuBoard[3][7] = int(input())
+    SudokuBoard[3][8] = int(input())
+    SudokuBoard[4][0] = int(input())
+    SudokuBoard[4][1] = int(input())
+    SudokuBoard[4][2] = int(input())
+    SudokuBoard[4][3] = int(input())
+    SudokuBoard[4][4] = int(input())
+    SudokuBoard[4][5] = int(input())
+    SudokuBoard[4][6] = int(input())
+    SudokuBoard[4][7] = int(input())
+    SudokuBoard[4][8] = int(input())
+    SudokuBoard[5][0] = int(input())
+    SudokuBoard[5][1] = int(input())
+    SudokuBoard[5][2] = int(input())
+    SudokuBoard[5][3] = int(input())
+    SudokuBoard[5][4] = int(input())
+    SudokuBoard[5][5] = int(input())
+    SudokuBoard[5][6] = int(input())
+    SudokuBoard[5][7] = int(input())
+    SudokuBoard[5][8] = int(input())
+    SudokuBoard[6][0] = int(input())
+    SudokuBoard[6][1] = int(input())
+    SudokuBoard[6][2] = int(input())
+    SudokuBoard[6][3] = int(input())
+    SudokuBoard[6][4] = int(input())
+    SudokuBoard[6][5] = int(input())
+    SudokuBoard[6][6] = int(input())
+    SudokuBoard[6][7] = int(input())
+    SudokuBoard[6][8] = int(input())
+    SudokuBoard[7][0] = int(input())
+    SudokuBoard[7][1] = int(input())
+    SudokuBoard[7][2] = int(input())
+    SudokuBoard[7][3] = int(input())
+    SudokuBoard[7][4] = int(input())
+    SudokuBoard[7][5] = int(input())
+    SudokuBoard[7][6] = int(input())
+    SudokuBoard[7][7] = int(input())
+    SudokuBoard[7][8] = int(input())
+    SudokuBoard[8][0] = int(input())
+    SudokuBoard[8][1] = int(input())
+    SudokuBoard[8][2] = int(input())
+    SudokuBoard[8][3] = int(input())
+    SudokuBoard[8][4] = int(input())
+    SudokuBoard[8][5] = int(input())
+    SudokuBoard[8][6] = int(input())
+    SudokuBoard[8][7] = int(input())
+    SudokuBoard[8][8] = int(input())
+    printBoard(SudokuBoard)
+    sudokuSolver(SudokuBoard)
+if __name__ == "__main__":
+    main()
+msvcrt.getch()
